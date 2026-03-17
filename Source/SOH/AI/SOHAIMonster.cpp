@@ -34,17 +34,17 @@ ASOHAIMonster::ASOHAIMonster()
 
 	bUseControllerRotationYaw = false;
 
-	PatrolSpeed = 200.f;
-	ChaseSpeed = 600.f;
+	PatrolSpeed = 200.f; // 순찰 속도
+	ChaseSpeed = 600.f; // 추적 속도
 
-	SightRadius = 1000.f;
-	LoseSightRadius = 1300.f;
+	SightRadius = 1000.f; // 시야 범위
+	LoseSightRadius = 1300.f; // 놓쳤을 때 
 	PeripheralVisionAngle = 80.f;
 
-	HearingRange = 1500.f;
+	HearingRange = 1500.f; // 소리 듣기 범위
 
-	AttackDamage = 50.0f;
-	AttackRange = 200.0f;
+	AttackDamage = 50.0f; // 공격 데미지
+	AttackRange = 200.0f; // 공격 범위
 }
 
 void ASOHAIMonster::BeginPlay()
@@ -53,7 +53,7 @@ void ASOHAIMonster::BeginPlay()
 
     if (!PatrolRouteActor)
     {
-        TArray<AActor*> FoundRoutes;
+        TArray<AActor*> FoundRoutes; // 경로 찾기
         UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASOHPatrolRoute::StaticClass(), FoundRoutes);
 
         if (FoundRoutes.Num() > 0)
@@ -81,7 +81,6 @@ void ASOHAIMonster::BeginPlay()
 	SetMoveSpeed(PatrolSpeed);
 }
 
-
 void ASOHAIMonster::SetMoveSpeed(float NewSpeed)
 {
 	if (auto* Move = GetCharacterMovement())
@@ -90,17 +89,18 @@ void ASOHAIMonster::SetMoveSpeed(float NewSpeed)
 	}
 }
 
-void ASOHAIMonster::PlayLookAroundMontage()
+void ASOHAIMonster::PlayLookAroundMontage() // 주변 둘러보기
 {
     if (!LookAroundMontage) return;
 
+    // 플레이어를 찾지 못하면 주변 둘러보는 AnimMontage 재생
     if (UAnimInstance* Anim = GetMesh() ? GetMesh()->GetAnimInstance() : nullptr)
     {
         Anim->Montage_Play(LookAroundMontage);
     }
 }
 
-void ASOHAIMonster::TryAttack()
+void ASOHAIMonster::TryAttack() // 공격 시도
 {
 	AActor* Target = nullptr;
 	if (AAIController* AIC = Cast<AAIController>(GetController()))
@@ -112,7 +112,7 @@ void ASOHAIMonster::TryAttack()
 	}
 	if (!Target || Target == this) return;
 
-    if (AttackMontage)
+    if (AttackMontage) // 공격 애니메이션 재생
     {
         if (UAnimInstance* Anim = GetMesh() ? GetMesh()->GetAnimInstance() : nullptr)
         {
@@ -120,7 +120,7 @@ void ASOHAIMonster::TryAttack()
         }
     }
 
-    if (AttackSound)
+    if (AttackSound) // 공격 사운드 재생
     {
         UGameplayStatics::PlaySoundAtLocation(
             this,
@@ -129,10 +129,11 @@ void ASOHAIMonster::TryAttack()
         );
     }
 
+    // 데미지 전달
     UGameplayStatics::ApplyDamage(Target, AttackDamage, GetController(), this, nullptr);
 }
 
-bool ASOHAIMonster::HasLineOfSightToTarget(AActor* Target)
+bool ASOHAIMonster::HasLineOfSightToTarget(AActor* Target) // 플레이어 발견 로직
 {
     if (!Target)
         return false;
@@ -179,7 +180,7 @@ bool ASOHAIMonster::HasLineOfSightToTarget(AActor* Target)
     return false;
 }
 
-void ASOHAIMonster::CheckDoorAhead()
+void ASOHAIMonster::CheckDoorAhead() // 문 확인하기
 {
     UWorld* World = GetWorld();
     if (!World) return;
@@ -207,11 +208,11 @@ void ASOHAIMonster::CheckDoorAhead()
 
     if (HitActor->GetClass()->ImplementsInterface(USOHDoorInterface::StaticClass()))
     {
-        ISOHDoorInterface::Execute_OpenDoorForAI(HitActor, this);
+        ISOHDoorInterface::Execute_OpenDoorForAI(HitActor, this); // 몬스터가 직접 문 Open
     }
 }
 
-void ASOHAIMonster::PlayDetectPlayerSound()
+void ASOHAIMonster::PlayDetectPlayerSound() // 플레이어 발견했을 때 소리 재생
 {
     if (!bSoundEnabled) return;
 
@@ -229,7 +230,7 @@ void ASOHAIMonster::PlayDetectPlayerSound()
     );
 }
 
-void ASOHAIMonster::PlayArriveAtTargetSound()
+void ASOHAIMonster::PlayArriveAtTargetSound() // 목표 지점에 도착했을 때 소리 지생
 {
     if (!bSoundEnabled) return;
     if (!ArriveAtTargetSound) return;
@@ -239,7 +240,7 @@ void ASOHAIMonster::PlayArriveAtTargetSound()
     ArriveAudioComp->Play();
 }
 
-void ASOHAIMonster::PlayHearNoiseSound()
+void ASOHAIMonster::PlayHearNoiseSound() // 소음 듣기
 {
     if (!bSoundEnabled) return;
 
@@ -255,6 +256,7 @@ void ASOHAIMonster::PlayHearNoiseSound()
     );
 }
 
+// 소리가 난 지점 조사
 void ASOHAIMonster::StartInvestigateNoise(const FVector& NoiseLocation, AAIController* InController)
 {
     if (bInvestigatingNoise || !Controller)
@@ -307,6 +309,7 @@ void ASOHAIMonster::StartInvestigateNoise(const FVector& NoiseLocation, AAIContr
     );
 }
 
+// 소음 조사 종료
 void ASOHAIMonster::EndInvestigateNoise()
 {
     bInvestigatingNoise = false;
@@ -323,7 +326,7 @@ void ASOHAIMonster::EndInvestigateNoise()
     }
 }
 
-bool ASOHAIMonster::SeePlayerDuringInvestigate()
+bool ASOHAIMonster::SeePlayerDuringInvestigate() // 소음 조사 중 플레이어 발견
 {
     ACharacter* Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
     if (!Player) return false;
@@ -331,7 +334,7 @@ bool ASOHAIMonster::SeePlayerDuringInvestigate()
     return HasLineOfSightToTarget(Player);
 }
 
-void ASOHAIMonster::StopAllMontagesInstant()
+void ASOHAIMonster::StopAllMontagesInstant() // 몬스터 몽타주 강제 중지
 {
     if (USkeletalMeshComponent* MontageMesh = GetMesh())
     {
@@ -342,7 +345,7 @@ void ASOHAIMonster::StopAllMontagesInstant()
     }
 }
 
-void ASOHAIMonster::PlayChaseLoop()
+void ASOHAIMonster::PlayChaseLoop() // 추적 루프 시작
 {
     if (!bSoundEnabled) return;
     if (!ChaseSound) return;
@@ -355,7 +358,7 @@ void ASOHAIMonster::PlayChaseLoop()
     }
 }
 
-void ASOHAIMonster::StopChaseLoop()
+void ASOHAIMonster::StopChaseLoop() // 추적 루프 종료
 {
     if (!ChaseAudioComp) return;
 
@@ -365,7 +368,7 @@ void ASOHAIMonster::StopChaseLoop()
     }
 }
 
-void ASOHAIMonster::StopArriveSound()
+void ASOHAIMonster::StopArriveSound() // 도착했을 때 소리 정지
 {
     if (!ArriveAudioComp) return;
 
