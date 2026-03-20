@@ -116,21 +116,6 @@ void ASOHLampSwitch::ToggleAllLamps()
     // 🔥 스위치의 "논리 상태"를 먼저 토글
     bPowerOn = !bPowerOn;
 
-    // 라이트 상태 체크
-    for (ASOHLamp* Lamp : ControlledLamps)
-    {
-        if (!Lamp) continue;
-
-        if (bPowerOn)
-        {
-            Lamp->TurnOn();
-        }
-        else
-        {
-            Lamp->TurnOff();
-        }
-    }
-    
     // 🔥 현재 상태를 램프들에 강제로 적용
     ApplyPowerState();
 }
