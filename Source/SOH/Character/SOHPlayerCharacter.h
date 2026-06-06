@@ -11,6 +11,25 @@ class UAnimMontage;
 class USoundBase;
 class UUserWidget;
 class USpringArmComponent;
+class UCameraComponent;
+//lass USkeletalMeshComponent;
+
+UENUM(BlueprintType)
+enum class EViewMode : uint8
+{
+	BackView UMETA(DisplayName = "BackView"), // 0번 인덱스
+	ShoulderView UMETA(DisplayName = "ShoulderView") // 1번 인덱스
+};
+
+USTRUCT(BlueprintType)
+struct FSpringArmConfig
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
+	float TargetArmLength = 60.f;
+	
+};
 
 UCLASS()
 class SOH_API ASOHPlayerCharacter : public ACharacter
@@ -21,6 +40,12 @@ public:
 	ASOHPlayerCharacter();
 
 public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+	USpringArmComponent* SpringArm;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+	UCameraComponent* FollowCamera;
+
 	//GameInstance에서 호출하기 위해 만들었습니다.
 	UFUNCTION(BlueprintCallable)
 	float GetHealth() const { return Health; }
@@ -49,6 +74,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI Audio")
 	USoundBase* UICloseSound;
 
+	UFUNCTION(BlueprintCallable, Category = "Camera")
+	void SetViewMode(EViewMode NewViewMode);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -69,6 +97,11 @@ protected:
 
 	FVector2D CurrentMoveInput;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
+	TArray<FSpringArmConfig> SpringArmConfigs;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
+	EViewMode CurrentViewMode = EViewMode::ShoulderView;
 
 	// 여기서부터
 
@@ -171,11 +204,10 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement")
 	bool bIsRunning = false;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Camera")
-	USpringArmComponent* SpringArm;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	//USkeletalMeshComponent* FaceMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
-	class UCameraComponent* FollowCamera;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
     float MinPitchAngle = -60.f;

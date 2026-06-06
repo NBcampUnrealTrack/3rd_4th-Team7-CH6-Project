@@ -34,8 +34,7 @@ ASOHPlayerCharacter::ASOHPlayerCharacter()
 
 	// 카메라는 자유롭게 회전
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
-	SpringArm->SetupAttachment(GetMesh(), FName("CharacterCameraSocket"));
-	SpringArm->TargetArmLength = 60.f;
+	SpringArm->SetupAttachment(GetMesh(), TEXT("CharacterCameraSocket"));
 	SpringArm->bUsePawnControlRotation = true;  // ← 마우스 따라감
 
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
@@ -50,6 +49,18 @@ ASOHPlayerCharacter::ASOHPlayerCharacter()
 void ASOHPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	GetWorldTimerManager().SetTimerForNextTick([this]()
+	{
+		if (SpringArmConfigs.IsValidIndex(static_cast<int32>(EViewMode::ShoulderView)))
+		{
+			SetViewMode(EViewMode::ShoulderView);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("아직 카메라 설정 배열이 로드되지 않았습니다!"));
+		}
+	});
 
 	if (PlayerHUDClass)
 	{
@@ -1100,5 +1111,36 @@ void ASOHPlayerCharacter::SetFlashlight(ASOHFlashlight* InLight)
 	else
 	{
 		bFlashlightOn = false;
+	}
+}
+
+void ASOHPlayerCharacter::SetViewMode(EViewMode NewViewMode)
+{
+	// 열거형을 인덱스(int32)로 변환
+	int32 Index = static_cast<int32>(NewViewMode);
+
+	// ⭐ 크래시 방지 핵심: 배열 크기 검사
+	if (SpringArmConfigs.IsValidIndex(Index))
+	{
+		const FSpringArmConfig& Config = SpringArmConfigs[Index];
+
+		// 카메라 설정 적용
+		SpringArm->TargetArmLength = Config.TargetArmLength;
+
+		CurrentViewMode = NewViewMode;
+
+		UE_LOG(LogTemp, Log, TEXT("뷰 모드가 %d번으로 변경되었습니다."), Index);
+	}
+	else
+	{
+		// 데이터가 없을 경우 경고 출력 (패키징 후 로그에서 확인 가능)
+		UE_LOG(LogTemp, Error, TEXT("SpringArmConfigurations 배열에 %d번 인덱스가 없습니다! (현재 크기: %d)"),
+			Index, SpringArmConfigs.Num());
+
+		// 안전을 위해 0번 인덱스라도 있다면 기본값으로 적용
+		if (SpringArmConfigs.Num() > 0 && Index != 0)
+		{
+			SetViewMode(EViewMode::BackView);
+		}
 	}
 }
