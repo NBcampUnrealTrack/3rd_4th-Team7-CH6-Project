@@ -78,6 +78,7 @@ Saved/*
 # Compiled source files for the engine to use
 Intermediate/*
 Plugins/**/Intermediate/*
+Plugins/**/VisualStudioTools/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
