@@ -56,6 +56,18 @@
 
 <br>
 
+## 스크린 샷
+
+(https://github.com/user-attachments/assets/1df1fab2-0f10-44a8-8c1a-626b66a0f0b6)
+(https://github.com/user-attachments/assets/0afc1b6d-eae0-44df-b5cf-7bdca613263f)
+(https://github.com/user-attachments/assets/ffc544a7-9046-4164-a06e-d3e61438eb27)
+(https://github.com/user-attachments/assets/48c1c80f-5790-4ea8-8238-93289616c302)
+(https://github.com/user-attachments/assets/a486d38f-dc1a-495c-be99-99fdaaaa5f34)
+(https://github.com/user-attachments/assets/477d1649-24a7-4d32-b9ff-5df733b9552e)
+(https://github.com/user-attachments/assets/e9845f8a-8905-4aef-ad9e-78b9350ba871)
+
+<br>
+
 ## 🛠 트러블 슈팅
 - [ACCESS VIOLATION 크래시](https://www.notion.so/Interact-UI-3797db501b9f80e48cd2dca01f756e34)
 - [UI 정지 시 크래시 및 머리카락 튐](https://www.notion.so/Groom-UI-0c27db501b9f83b7849981a1faf3fd85)
