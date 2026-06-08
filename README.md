@@ -64,7 +64,6 @@
 <br>
 
 ##  스크린 샷
-!(https://github.com/user-attachments/assets/8d6d5503-e9f8-429c-8d2c-7019a1437158)
 
 <br>
 
