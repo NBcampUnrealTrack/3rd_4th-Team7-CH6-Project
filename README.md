@@ -37,17 +37,77 @@
 - 목표 : 추적하는 귀신을 피해 의문의 학교를 탈출하고, 학교에 숨겨진 진실을 밝혀내는 것.
 - 플랫폼 : PC (Windows)
 
+<br>
+
 ## 🎮 게임 플레이
 - **탐험과 퍼즐**: 플레이어는 학교 곳곳을 탐험하며, 다양한 퍼즐을 해결해야 합니다. 퍼즐은 학교의 비밀과 관련이 있으며, 이를 통해 이야기가 전개됩니다.
 - **추적과 도망**: 플레이어는 끊임없이 추적하는 귀신으로부터 도망쳐야 합니다. 귀신은 플레이어의 행동에 반응하며, 긴장감 넘치는 추격전을 벌입니다.
 - **스토리텔링**: 플레이어는 학교의 비밀을 밝혀내며, 자신의 과거와 마주하게 됩니다.
 
+<br>
+
+## 🎥 영상
+
+트레일러
+🔗 [YouTube](https://youtu.be/L81S9PNQ1t8)
+
+시연 영상
+🔗 [YouTube](https://youtu.be/zGdyHV9zYQc?si=iXbVj8B_83TvChyS)
+
+<br>
+
+## Scrheenshot
+![Screenshot 1](SOH_Screenshot1.png)
+![Screenshot 2](SOH_Screenshot2.png)
+![Screenshot 3](SOH_Screenshot3.png)
+
+<br>
+
 ## 🛠️ 개발 팀
-- **정현수(팀장)**  : Design / Story / Metahuman / Cutscene
-- **강탁완(부팀장)** : Sound / Puzzle
-- **곽동호** : AI
-- **장민재** : Character
-- **신형철** : Level Design
-- **김형돈** : GameMode
-- **이서영** : Item
-- **김슬빈** : UI/UX
+
+| 담당자 | 담당 역할 |
+|-----------|--------|
+| 정현수(팀장) | Design / Story / Metahuman / Cutscene |
+| 강탁완(부팀장) | Sound / Puzzle |
+| 곽동호 | AI |
+| 장민재 | Character |
+| 신형철 | Level Design |
+| 김형돈 | GameMode |
+| 이서영 | Item |
+| 김슬빈 | UI/UX |
+
+<br>
+
+## ⚙️ 사용한 툴
+
+- [Visual Studio 2022] - 개발 환경
+- [Rider](https://www.jetbrains.com/ko-kr/rider/) – 개발 환경 (병행 사용)
+- [Team Notion](https://www.notion.so/teamsparta/7-28f2dc3ef51480d4b135e49596fcfe90) – 기획, 정리
+- [Miro](https://miro.com/app/board/uXjVJ1PXqtA=//) – Game Flow Chart 제작 및 아이디어 공유
+- [Unreal Engine 5] - 게임 엔진
+- [Blender] - 3D 모델링
+- [3Ds Max] - 3D 모델링
+- [Substance Painter] - 텍스처링
+
+<br>
+
+## 🗚 사용 폰트
+
+- [210 미스테리](https://steemit.com/zzan/@ziq/3wjoeu-210)
+- [210 카르페디엠](https://design210.com/cloud/item.detail.renew?idx=251)
+- [페이퍼로지 7](https://noonnu.cc/font_page/1456)
+
+<br>
+
+## 🧑‍🤝‍🧑7조 팀원
+
+| 이름 | 이메일 | GitHub |
+|------|--------|--------|
+| 정현수 | freedomquest88@naver.com | (https://github.com/jhs10507) |
+| 강탁완 |  | (https://github.com/KANGTAKWAN?tab=repositories) |
+| 곽동호 |  |  |
+| 장민재 |  | (https://github.com/manjjaii) |
+| 신형철 | gudcjf6204@naver.com | (https://github.com/Shc17) |
+| 김형돈 | gudehs927@naver.com | (https://github.com/gudehs927) |
+| 이서영 |  |  |
+| 김슬빈 | kimseulbin0102@gmail.com | (https://github.com/kimsluebin) |
