@@ -56,10 +56,16 @@
 
 <br>
 
-## Scrheenshot
-![Screenshot 1](SOH_Screenshot1.png)
-![Screenshot 2](SOH_Screenshot2.png)
-![Screenshot 3](SOH_Screenshot3.png)
+## 🛠 트러블 슈팅
+- [ACCESS VIOLATION 크래시](https://www.notion.so/Interact-UI-3797db501b9f80e48cd2dca01f756e34)
+- [UI 정지 시 크래시 및 머리카락 튐](https://www.notion.so/Groom-UI-0c27db501b9f83b7849981a1faf3fd85)
+- [메타 휴먼 레벨 시퀸스 크러시 문제](https://app.notion.com/p/3797db501b9f80d49555f1cde8e827f3)
+
+
+<br>
+
+## 브로슈어
+🔗 (https://www.notion.so/teamsparta/3-4-7-The-Shape-of-Hatred-2d22dc3ef5148072937aeb22c8e113b4)
 
 <br>
 
