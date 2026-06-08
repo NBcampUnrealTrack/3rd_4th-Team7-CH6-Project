@@ -1,5 +1,5 @@
 # 『 The Shape of Hatred 』
-![Project Thumbnail](SOH_Thumbnail.png)
+![SOH_Thumbnail.png](https://github.com/user-attachments/assets/7ce058ea-111e-4c80-8dc2-3912ce595ea0)
 
 ---
 
