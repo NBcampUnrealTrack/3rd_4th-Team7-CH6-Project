@@ -61,6 +61,10 @@
 - [UI 정지 시 크래시 및 머리카락 튐](https://www.notion.so/Groom-UI-0c27db501b9f83b7849981a1faf3fd85)
 - [메타 휴먼 레벨 시퀸스 크러시 문제](https://app.notion.com/p/3797db501b9f80d49555f1cde8e827f3)
 
+<br>
+
+##  스크린 샷
+!(https://github.com/user-attachments/assets/8d6d5503-e9f8-429c-8d2c-7019a1437158)
 
 <br>
 
